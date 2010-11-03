@@ -1,1 +1,50 @@
-Just a test ^^
+###############################
+# Téléchargement du code du CMS
+###############################
+
+Dans le terminal, placez-vous dans le dossier où vous voulez télécharger le code et lancez la commande
+
+git clone git://github.com/bnabilos/CCMS
+
+Un dossier CCMS se créera avec tout le code de l'application
+
+
+#####################################
+# Installation de Python et de Django
+#####################################
+
+Tutorial complet : http://docs.djangoproject.com/en/dev/intro/install/
+
+
+#####################################
+# Configuration de la base de données
+#####################################
+
+Modifiez la ligne 15 du fichier "cms/settings.py" et remplacez "/Users/bnabilos/CCMS/cms.db" par le chemin absolu vers le fichier de la base de donnée "cms.db" se trouvant dans le dossier "cms"
+
+
+##########################
+# Lancer le serveur DJANGO
+##########################
+
+1- Placez-vous dans le dossier "cms" du code téléchargé
+2- Exécuter la commande "python manage.py runserver"
+
+Vous devez obtenir le message suivant :
+
+Validating models...
+0 errors found.
+
+Django version 1.0, using settings 'mysite.settings'
+Development server is running at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+
+####################################
+# Accéder à l'administration du site
+####################################
+
+1- http://127.0.0.1:8000/cms/admin
+2- Nom d'utilisateur : admin
+3- Mot de passe : admin
+
