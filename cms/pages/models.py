@@ -5,10 +5,12 @@ import datetime
 from django.contrib.auth.models import User
 from django.db import models
 
+from champs.models import Titre
+
 
 class Categorie(models.Model):
-	#cat = models.ForeignKey("self", verbose_name="Catégorie parente")
-	titre = models.CharField("Titre", max_length=200)
+	#cat = models.ForeignKey(self, verbose_name="Catégorie parente")
+	titre = models.ForeignKey(Titre, verbose_name="Titre")
 	alias = models.SlugField("Alias", max_length=200, unique=True)
 	etat_choix = (
 		(1, "Publié"),
@@ -22,12 +24,12 @@ class Categorie(models.Model):
 		ordering = ['titre']
 	
 	def __unicode__(self):
-		return self.titre
+		return self.titre.titre
 		
 		
 
 class Article(models.Model):
-	titre = models.CharField("Titre", max_length=200)
+	titre = models.ForeignKey(Titre, verbose_name="Titre")
 	contenu = models.TextField("Contenu", blank=True)
 	date_pub = models.DateTimeField("Date de publication", default=datetime.datetime.now)
 	
@@ -48,4 +50,4 @@ class Article(models.Model):
 		ordering = ['-date_pub']
 	
 	def __unicode__(self):
-		return self.titre
+		return self.titre.titre

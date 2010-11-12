@@ -1,4 +1,13 @@
 -----------------
+V0.3 - 06/11/2010
+-----------------
+
+- Modification du modèle du CMS
+	- Ajout d'un module "Champs" pour gérer les différents types de données
+	- Liaison de l'attribut "Titre" du module "Champ" avec les titres des articles et des catégories
+
+
+-----------------
 V0.2 - 06/11/2010
 -----------------
 
