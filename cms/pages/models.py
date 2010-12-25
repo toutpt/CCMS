@@ -4,20 +4,13 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import signals
 
 from champs.models import Titre
 
-
 class Categorie(models.Model):
-	#cat = models.ForeignKey(self, verbose_name="Catégorie parente")
 	titre = models.ForeignKey(Titre, verbose_name="Titre")
 	alias = models.SlugField("Alias", max_length=200, unique=True)
-	etat_choix = (
-		(1, "Publié"),
-		(2, "Non publié"),
-		(3, "Archivé"),
-	)
-	etat = models.IntegerField("Etat", choices=etat_choix, default=1)
 	description = models.TextField("Description", blank=True)
 	
 	class Meta:
@@ -25,8 +18,7 @@ class Categorie(models.Model):
 	
 	def __unicode__(self):
 		return self.titre.titre
-		
-		
+
 
 class Article(models.Model):
 	titre = models.ForeignKey(Titre, verbose_name="Titre")
