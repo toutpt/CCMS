@@ -6,5 +6,8 @@ class Titre(models.Model):
 	titre = models.CharField("Titre", max_length=200, unique=True)
 	#instances = models.PositiveIntegerField("Instances")
 	
+	class Meta:
+		ordering = ['titre']
+		
 	def __unicode__(self):
 		return self.titre
