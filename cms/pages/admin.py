@@ -20,26 +20,57 @@ class CategorieForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		forms.ModelForm.__init__(self, *args, **kwargs)
-		self.initTitre = kwargs['instance'].titre
 		
+		# Dans le cas d'une modification, on récupère le titre actuel
+		if kwargs.get('instance'):
+			self.initTitre = kwargs['instance']
 	
-	def clean_titre(self):
-		#print("Old Value :")
-		#print(self.initTitre)
-		oldTitre = Titre(titre=self.initTitre)
-		newTitre = Titre(titre=self.cleaned_data['titre'])
-		for e in Titre.objects.all():
-			if e.titre == newTitre.titre:
-				return Titre.objects.get(titre=self.cleaned_data['titre'])
-		if newTitre.titre == self.initTitre:
-			print("It's the same value")
-		else:
-			for k in Titre.objects.all():
-				if k.titre == oldTitre.titre:
-					k.titre == newTitre.titre
-			print("Titre updated")
-		newTitre.save()
+	def update_one(self):
+		
+		# On crée un titre avec la nouvelle valeur du champ
+		new = Titre(titre=self.cleaned_data['titre'])
+		
+		# On cherche si le nouveau titre existe déjà
+		for old in Titre.objects.all():
+			if old.titre == new.titre:
+				return old
+		
+		# S'il n'existe pas, on sauvegarde le nouveau titre
+		new.save()
 		return Titre.objects.get(titre=self.cleaned_data['titre'])
+	
+	def update_all(self):
+		
+		# On crée un titre avec la nouvelle valeur du champ
+		new = Titre(titre=self.cleaned_data['titre'])
+		
+		for old in Titre.objects.all():
+			if old.titre == new.titre:
+				for oldCat in Categorie.objects.all():
+					if oldCat.titre.titre == self.initTitre.titre.titre:
+						oldCat.titre = Titre.objects.get(titre=self.cleaned_data['titre'])
+						oldCat.save()
+				return old
+		
+		if self.initTitre:
+			new.save()
+			for old in Titre.objects.all():
+				if old.titre == new.titre:
+					print("Titre similaires")
+					print(old.titre)
+					print(new.titre)
+					for oldCat in Categorie.objects.all():
+						if oldCat.titre.titre == self.initTitre.titre.titre:
+							oldCat.titre = Titre.objects.get(titre=self.cleaned_data['titre'])
+							oldCat.save()
+					return old
+		
+		new.save()
+		return Titre.objects.get(titre=self.cleaned_data['titre'])
+		
+	def clean_titre(self):
+		return self.update_all()
+	
 	
 class ArticleForm(forms.ModelForm):
 	
