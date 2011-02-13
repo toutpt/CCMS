@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<td width="30">ID</td>
+		<td>Titre</td>
+	</tr>
+	{% for c in cat %}
+		<tr>
+			<td>{{ c.id }}</td>
+			<td><a href="{{ c.get_absolute_url }}">{{ c.titre.titre }}</a></td>
+		</tr>
+	{% endfor %}
+</table

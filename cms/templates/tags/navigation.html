@@ -1,0 +1,19 @@
+<ul>
+	<li><a href="/">Accueil</a></li>
+	<li><a href="/categories/">Catégories</a></li>
+	<li><a href="#">Articles</a></li>
+</ul>
+
+<div class="fr">
+<ul>
+	<li>
+		{% if user.is_authenticated %}
+			<a href="#">Logout</a>
+		{% else %}
+			<a href="#">Login</a>
+		{% endif %}
+	</li>
+</ul>
+</div>
+
+<div class="cb"></div>

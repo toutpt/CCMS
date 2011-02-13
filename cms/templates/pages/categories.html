@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Liste des catégories</h1>
+<a href="/ajouter_categorie/">Ajouter une catégorie</a><br /><br />
+
+<table>
+	<tr>
+		<td width="80">ID</td>
+		<td width="200">Titre</td>
+		<td width="100">&nbsp;</td>
+		<td width="100">&nbsp;</td>
+	</tr>
+{% for c in cat %}
+	<tr>
+		<td>{{ c.id }}</td>
+		<td><a href="{{ c.get_absolute_url }}">{{ c.titre.titre }}</a></td>
+		<td><a href="#">Modifier</a></td>
+		<td><a href="#">Supprimer</a></td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

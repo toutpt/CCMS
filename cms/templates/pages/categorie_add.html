@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Ajouter une catégorie</h1>
+<br /><br />
+
+<form action="/ajouter_categorie/" method="post">
+{{ form.as_table }}
+<input type="submit" value="Envoyer" />
+</form>
+
+
+{% endblock %}

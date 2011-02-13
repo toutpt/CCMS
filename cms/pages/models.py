@@ -18,6 +18,10 @@ class Categorie(models.Model):
 	
 	def __unicode__(self):
 		return self.titre.titre
+		
+	@models.permalink
+	def get_absolute_url(self):
+		return ('pages_categorie', (), { 'categorie_alias': self.alias })
 
 
 class Article(models.Model):

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>{{ c.titre.titre }}</h1>
+{{ c.description }} <br /><br />
+
+{% for a in articles %}
+<div> <a href="{{ a.get_absolute_url }}">{{ a.titre.titre }}</a> </div>
+{% endfor %}
+{% endblock %}
